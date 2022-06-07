@@ -25,9 +25,9 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: "robert.public@wilton.org.uk"
+    fullname: Robert Wilton
+    organization: Cisco
+    email: "rwilton@cisco.com"
 
 normative:
 
