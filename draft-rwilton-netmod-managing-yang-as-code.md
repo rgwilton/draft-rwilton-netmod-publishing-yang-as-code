@@ -144,7 +144,7 @@ The proposal is to evolve the IANA registries for YANG modules to acheive the fo
 * Allow IANA to provide a per RFC stable reference to the latest bugfixed version of a YANG module that can be embedded in the RFC.
 * TODO - IANA should also maintain tree diagram information, but which revisions of other modules should the tree ouptut be generated from.
 
-## Ensure that models don't change at late phases of the IETF review cycle.
+## Ensure that models don't change at late phases of the IETF review cycle
 
 Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.
 
@@ -154,7 +154,7 @@ Generally, YANG encourages only backwards-compatible changes to YANG models, but
 
 ## Make use of YANG versioning and allow breaking changes.
 
-## Make use of YANG packages to build 
+## Make use of YANG packages to build
 
 ## Manage development versions of IETF YANG modules on github.
 
