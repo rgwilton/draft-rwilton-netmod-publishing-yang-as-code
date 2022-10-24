@@ -56,12 +56,13 @@ This is very much a -00 initial draft, and I'm seeking input from the WG as to w
 Currently, IETF publishes YANG modules as extractable code assets within RFCs.  I.e., the YANG module source text is embedded directly in the RFC using CODE BEGINS/ENDS markers, and can be extracted via tooling, such as rfcstrip.  As such, the RFC should be regarded as the canonical reference to any embedded YANG Modules, but copies of the YANG modules are also available in the IANA YANG Module Names registry, YANG Catalog, and the YangModels/yang Github repository.
 
 The key components of RFCs containing one or more YANG modules are generally:
- * An overview of the technology that the YANG module(s) cover
- * A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
- * YANG tree diagram {{?RFC8340}} output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)
- * The YANG module code asset(s)
- * Relevant security considerations for the YANG module, and
- * Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.
+
+* An overview of the technology that the YANG module(s) cover
+* A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
+* YANG tree diagram {{?RFC8340}} output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)
+* The YANG module code asset(s)
+* Relevant security considerations for the YANG module, and
+* Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.
 
 ## Problems with the existing Process
 
