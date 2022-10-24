@@ -44,6 +44,8 @@ TODO Abstract
 
 This document proposes that the IETF tries a process experiment for the management and evolution of YANG modules created and published by the IETF.  The goal is the make the process easier and more helpful, allowing YANG modules to be published more quickly without losing the benefits of having a stable and industry respected consensus process.
 
+This is very much a -00 initial draft, and I'm seeking input from the WG as to whether these process changes make sense, input from the chairs as to whether these process changes are helpful.
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -214,18 +216,15 @@ The existing RFC errata process can be used to track bugs against stable publish
 Small fixes to published IETF YANG modules are processed in a similar fashion to how the IETF processes errata.  I.e., the responsible Area Director has authority to approve minor fixes 
 
 
+although there is also an IANA registry that eferences and 
 
-
- although there is also an IANA registry that references and 
-
- embedded the YANG module source in RFCs, where they cannot be updated without publishing a new RFC, not even for a bugfix or an errata.  Instead, the YANG modules would only be stored in an IANA registery, with the draft only maintaining a reference to the latest published version of the YANG module associated with the RFC.
+embedded the YANG module source in RFCs, where they cannot be updated without publishing a new RFC, not even for a bugfix or an errata.  Instead, the YANG modules would only be stored in an IANA registery, with the draft only maintaining a reference to the latest published version of the YANG module associated with the RFC.
 
 
 
 URL to an updateable reference to the latest published version of the YANG modules associated with the RFC.
 
 If we enact this change then there are further changes that would go along side it:
-- 
 
 ### IANA YANG Module References
 
@@ -243,7 +242,6 @@ The draft would hold
 
 One added benefit 
 
-##  
 
 
 # Security Considerations
@@ -266,6 +264,8 @@ This document has no IANA actions.
 
 # Acknowledgments
 {:numbered="false"}
+
+# Random stuff
 
 TODO.
 
