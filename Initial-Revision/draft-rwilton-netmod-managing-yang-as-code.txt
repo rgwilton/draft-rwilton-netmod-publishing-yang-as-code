@@ -71,20 +71,15 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  The Current Process for Publishing IETF YANG Modules
-   4.  Problems with the Existing Process
-     4.1.  Including code in the RFCs.
-       4.1.1.  Inter-dependency between YANG modules.
-       4.1.2.  A
-       4.1.3.  The overall RFC process is slow.
-       4.1.4.  Competition with Industry models.
-       4.1.5.  Alternative approaches
-       4.1.6.  OpenConfig
-       4.1.7.  Vendor YANG Modules
-       4.1.8.  All updates to the YANG modules require a new RFC to be
+   4.  Benefits and Downsides of IETF Standardization Process for YANG
+     4.1.  Alternative industry approaches
+       4.1.1.  OpenConfig
+       4.1.2.  Inter-dependency between YANG modules.
+       4.1.3.  All updates to the YANG modules require a new RFC to be
                published.
-       4.1.9.  YANG versioning and backwards compatibilty
-       4.1.10. Running Code
-       4.1.11. Handling Errata
+       4.1.4.  YANG versioning and backwards compatibilty
+       4.1.5.  Running Code
+       4.1.6.  Handling Errata
    5.  Proposals
      5.1.  Take YANG modules out of RFCs
    6.  Procedures for managing YANG modules within the IETF
@@ -154,6 +149,11 @@ Table of Contents
    *  Simple examples of using the YANG module, demonstrated as instance
       data in XML or JSON that conforms to the YANG module schema.
 
+   Normally responsiblity for creating and maintaining IETF YANG modules
+   is devolved to the WG responsible for the associated protocols.  YANG
+   Doctors help review the YANG modules produced by other WGs and areas
+   to improve the quality of the data models.
+
    The process for updating existing published IETF YANG modules with
    new content is similar to the IETF process for publishing new YANG
    modules.  The new additions can be put into updated revision of the
@@ -169,44 +169,50 @@ Table of Contents
    original YANG module via a bis version of the original YANG module
    RFC.
 
-4.  Problems with the Existing Process
+4.  Benefits and Downsides of IETF Standardization Process for YANG
 
-   This section lists some of the potential problems with the existing
-   IETF process of producing YANG models.  In some cases, althogh the
-   approach has issues, it has benefits also.
+   Some of the benefits of the existing IETF YANG module standardization
+   process are:
 
-4.1.  Including code in the RFCs.
+   *  Domain experts help create the YANG modules
 
-4.1.1.  Inter-dependency between YANG modules.
+   *  The work is distributed across more WGs and individuals
 
-   IETF YANG modules are being develeoped independently, but there are
-   often dependencies between YANG modules.  Other industry efforts at
-   creating common network management APIs take an approach of updating
-   related version of the YANG modules at the time, ensure that any
-   import dependencies are satisfied.
+   *  There is only a very gradual change to the YANG modules (due to
+      the latency in the IETF standardization process)
 
-4.1.2.  A
+   *  It follow the same process as for all other IETF output (i.e.,
+      RFCs)
 
-   YANG 1.0 and YANG 1.1 very strongly encourage only allowing
-   backwards-compatible changes to YANG modules.  This is a good
-   approach when modules are very stable, but has acted to slow down
-   development of YANG modules within the IETF, where folks are trying
-   to get them to be perfect rather than good enough.
+   There are also some downsides of the existing IETF YANG module
+   standarization process:
 
-   This makes a lot of sense whe, modules are very stable and well-
-   tested, but this approach makes it much harder to make fixes to YANG
-   modules.
+   *  The process take a very long time to standard IETF YANG modules,
+      significantly damaging market adoption.
 
-4.1.3.  The overall RFC process is slow.
+   *  IETF YANG modules for different protocols and features are being
+      develeoped smei-independently, but there are often dependencies
+      between YANG modules, which are hard to manage within the current
+      IETF process.
 
-   It takes a long time, and a lot of review, to publish YANG modules
-   within the IETF.
+   *  There is no effective work to ensure that IETF YANG modules work
+      together as a coherent network management configuration API will
+      all of the extra (not protocol configuration) also modelled.
 
-4.1.4.  Competition with Industry models.
+   *  The RFC errata mechanism doesn't really work effectively for YANG
+      modules, and hence it requires a lot of time and effort to even
+      make small fixes to the modules because it requires new RFCs to be
+      published.
 
-4.1.5.  Alternative approaches
+   *  Including the code in the RFCs imposes a lower line length limit
+      that would normally be used on code assets, potentially reducing
+      their readability.  E.g., if the YANG modules were not being put
+      in RFCs, then I doubt that anyone would format them to anything
+      less than 80 characters.
 
-4.1.6.  OpenConfig
+4.1.  Alternative industry approaches
+
+4.1.1.  OpenConfig
 
    OpenConfig is an industry led forum for developing network-device
    specific YANG modules.  There is quite a strong functional overlap
@@ -226,16 +232,23 @@ Table of Contents
    they ensure that all related YANG modules are updated as a cohesive
    set of modules.
 
-4.1.7.  Vendor YANG Modules
+4.1.2.  Inter-dependency between YANG modules.
 
-   Vendors publish YANG modules with much higher frequency and less
-   stability than IETF YANG modules, with the expectation that providing
-   some level of programmatic YANG API is better than none at all.
-   Vendors generally seem to have the expectation that they can make
-   non-backwards-compatible changes to YANG modules between releases, as
-   the models evolve and as they fix issues.
+   Other industry efforts at creating common network management APIs
+   take an approach of updating related version of the YANG modules at
+   the time, ensure that any import dependencies are satisfied.
 
-4.1.8.  All updates to the YANG modules require a new RFC to be
+   YANG 1.0 and YANG 1.1 very strongly encourage only allowing
+   backwards-compatible changes to YANG modules.  This is a good
+   approach when modules are very stable, but has acted to slow down
+   development of YANG modules within the IETF, where folks are trying
+   to get them to be perfect rather than good enough.
+
+   This makes a lot of sense whe, modules are very stable and well-
+   tested, but this approach makes it much harder to make fixes to YANG
+   modules.
+
+4.1.3.  All updates to the YANG modules require a new RFC to be
         published.
 
    The key aspect of the description above is that the YANG module
@@ -243,7 +256,7 @@ Table of Contents
    revision of the YANG module (even for a small fix) requires a new RFC
    to be issued.
 
-4.1.9.  YANG versioning and backwards compatibilty
+4.1.4.  YANG versioning and backwards compatibilty
 
    YANG 1[RFC6020] and 1.1[RFC7950] both adopt a model where the only
    changes to a module that are allowed are backwards compatible
@@ -251,7 +264,7 @@ Table of Contents
    via a formal deprecation and obsoletion process.  Deprecated and
    obsoleted nodes are retained in the modules.
 
-4.1.10.  Running Code
+4.1.5.  Running Code
 
    Ideally there are implementations to validate the YANG models that
    are being standardized.  By definition these implementations must be
@@ -269,7 +282,7 @@ Table of Contents
    the normal deprecation cycle) when moving from pre-release to
    published standard versions.
 
-4.1.11.  Handling Errata
+4.1.6.  Handling Errata
 
    The RFC editor provides a mechansim for reporting errata against
    RFCs, but this mechanism cannot be usefully used to fix mistakes in
