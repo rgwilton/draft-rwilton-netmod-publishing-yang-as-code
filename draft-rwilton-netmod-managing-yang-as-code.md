@@ -50,21 +50,23 @@ This is very much a -00 initial draft, and I'm seeking input from the WG as to w
 
 {::boilerplate bcp14-tagged}
 
-# Background
-
-## Existing Process for publishing New IETF YANG Modules
-Currently, IETF publishes YANG modules as extractable code assets within RFCs.  I.e., the YANG module source text is embedded directly in the RFC using CODE BEGINS/ENDS markers, and can be extracted via tooling, such as rfcstrip.  As such, the RFC should be regarded as the canonical reference to any embedded YANG Modules, but copies of the YANG modules are also available in the IANA YANG Module Names registry, YANG Catalog, and the YangModels/yang Github repository.
+# The Current Process for Publishing IETF YANG Modules
+IETF currently publishes YANG modules as extractable code assets within RFCs.  I.e., the YANG module source text is embedded directly in the RFC using CODE BEGINS/ENDS markers, and can be extracted via tooling, such as rfcstrip.  As such, the RFC is to be regarded as the canonical reference to any embedded YANG Modules.  However, copies of the YANG modules are also available in the IANA YANG Module Names registry, YANG Catalog, and the YangModels/yang Github repository.
 
 The key components of RFCs containing one or more YANG modules are generally:
 
-* An overview of the technology that the YANG module(s) cover
-* A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
-* YANG tree diagram {{?RFC8340}} output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)
-* The YANG module code asset(s)
-* Relevant security considerations for the YANG module, and
-* Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.
+* An overview of the technology that the YANG module(s) cover,
+* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
+* YANG tree diagram {{?RFC8340}} output to illustrate the schema structure for the YANG module(s).  Note, sometimes this is included as snippets of the module tree diagram output, potentially with a full copy of the module tree ouptut in an appendix.
+* The YANG module code asset(s),
+* Relevant security considerations for using the YANG module, and
+* Simple examples of using the YANG module, demonstrated as instance data in XML or JSON that conforms to the YANG module schema.
 
-## Problems with the existing Process
+The process for updating existing published IETF YANG modules with new content is similar to the IETF process for publishing new YANG modules.  The new additions can be put into updated revision of the original YANG module or as a new augmenting YANG module that only contains the new functionality.  If updating the original YANG module then the normal IETF process would be to create a bis version of the original YANG module RFC.  If the additions are being developed as augmentions in a separate extension YANG module then there is a choice of doing a bis version of the original YANG module RFC, or creating a separate RFC just for the extensions.
+
+Fixing errors in the YANG module is handled the same as updating the original YANG module via a bis version of the original YANG module RFC.
+
+# Problems with the Existing Process
 
 This section lists some of the potential problems with the existing IETF process of producing YANG models.  In some cases,  althogh the approach has issues, it has benefits also.
 
@@ -145,12 +147,12 @@ The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would s
 
 Hence, the proposal is that RFCs defining YANG modules would contain:
 
-* An overview of the technology that the YANG module(s) cover.
-* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s)
-* Snippets of tree output that describe the structure
-* A reference to latest version of the YANG module associated with the RFC (held in IANA)
-* A reference to the tree output (automatically generated) associated with the latest version of hte YANG module.
-* Security considerations relevant to the use of the YANG module.
+* An overview of the technology that the YANG module(s) cover,
+* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
+* Snippets of tree output that describe the structure,
+* A reference to latest version of the YANG module associated with the RFC (held in IANA),
+* A reference to the tree output (automatically generated) associated with the latest version of hte YANG module,
+* Security considerations relevant to the use of the YANG module,
 * Examples for using the YANG module.
 
 One additional minor benefit of taking the YANG module out of the RFC could be to increase the column length limit for IETF YANG modules (perhaps to 80 or 120 characters), which may faciliate a minor improvement to YANG module readability.
@@ -162,13 +164,16 @@ One additional minor benefit of taking the YANG module out of the RFC could be t
 IANA already maintains the "YANG Module Names" Registry.
 
 The YANG Module Names registry contains:
- - An entry for the latest revision of each IANA maintained YANG module (e.g., iana-if-types.yang)
- - An entry for every revision of each YANG module published in an RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published in {{?RFC7223}} and {{?RFC8343}})
+
+* An entry for the latest revision of each IANA maintained YANG module (e.g., iana-if-types.yang)
+* An entry for every revision of each YANG module published in an RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published in {{?RFC7223}} and {{?RFC8343}})
+
 
 Each entry in the YANG Module Names registry has fields that include:
- - the module name (not necessarily unique)
- - a link to the module revision YANG module source code
- - a reference to the RFC that contains the module.
+
+* the module name (not necessarily unique)
+* a link to the module revision YANG module source code
+* a reference to the RFC that contains the module.
 
 It would be helpful to have an IANA registry that contains a reference to every revision of a YANG module published by the IETF or IANA.
 
