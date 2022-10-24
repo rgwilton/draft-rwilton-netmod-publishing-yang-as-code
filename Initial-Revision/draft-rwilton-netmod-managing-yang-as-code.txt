@@ -310,14 +310,14 @@ Table of Contents
    version of the YANG module?
 
    Hence, the proposal is that RFCs defining YANG modules would contain:
-   - An overview of the technology that the YANG module(s) cover. -
+   - An overview of the technology that the YANG module(s) cover.  -
    High-level descriptions of key parts (e.g., containers and lists) of
    the YANG module(s) - Snippets of tree output that describe the
    structure - A reference to latest version of the YANG module
    associated with the RFC (held in IANA) - A reference to the tree
    output (automatically generated) associated with the latest version
-   of hte YANG module. - Security considerations relevant to the use of
-   the YANG module. - Examples for using the YANG module.
+   of hte YANG module.  - Security considerations relevant to the use of
+   the YANG module.  - Examples for using the YANG module.
 
    One additional minor benefit of taking the YANG module out of the RFC
    could be to increase the column length limit for IETF YANG modules
