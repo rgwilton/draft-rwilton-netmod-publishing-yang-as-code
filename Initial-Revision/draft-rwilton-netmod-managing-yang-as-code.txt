@@ -70,37 +70,36 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Background
-     3.1.  Existing Process for publishing New IETF YANG Modules
-     3.2.  Problems with the existing Process
-       3.2.1.  Including code in the RFCs.
-       3.2.2.  Inter-dependency between YANG modules.
-       3.2.3.  A
-       3.2.4.  The overall RFC process is slow.
-       3.2.5.  Competition with Industry models.
-       3.2.6.  Alternative approaches
-       3.2.7.  OpenConfig
-       3.2.8.  Vendor YANG Modules
-       3.2.9.  All updates to the YANG modules require a new RFC to be
+   3.  The Current Process for Publishing IETF YANG Modules
+   4.  Problems with the Existing Process
+     4.1.  Including code in the RFCs.
+       4.1.1.  Inter-dependency between YANG modules.
+       4.1.2.  A
+       4.1.3.  The overall RFC process is slow.
+       4.1.4.  Competition with Industry models.
+       4.1.5.  Alternative approaches
+       4.1.6.  OpenConfig
+       4.1.7.  Vendor YANG Modules
+       4.1.8.  All updates to the YANG modules require a new RFC to be
                published.
-       3.2.10. YANG versioning and backwards compatibilty
-       3.2.11. Running Code
-       3.2.12. Handling Errata
-   4.  Proposals
-     4.1.  Take YANG modules out of RFCs
-   5.  Procedures for managing YANG modules within the IETF
-     5.1.  Maintaining stable references (IANA)
-     5.2.  Standardizing new YANG modules within the IETF
-     5.3.  Enhancing existing YANG modules with new functionality
-     5.4.  Applying small fixes to IETF YANG modules
-       5.4.1.  IANA YANG Module References
-     5.5.  Living Bis Documents
-     5.6.  M
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+       4.1.9.  YANG versioning and backwards compatibilty
+       4.1.10. Running Code
+       4.1.11. Handling Errata
+   5.  Proposals
+     5.1.  Take YANG modules out of RFCs
+   6.  Procedures for managing YANG modules within the IETF
+     6.1.  Maintaining stable references (IANA)
+     6.2.  Standardizing new YANG modules within the IETF
+     6.3.  Enhancing existing YANG modules with new functionality
+     6.4.  Applying small fixes to IETF YANG modules
+       6.4.1.  IANA YANG Module References
+     6.5.  Living Bis Documents
+     6.6.  M
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -124,46 +123,61 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Background
+3.  The Current Process for Publishing IETF YANG Modules
 
-3.1.  Existing Process for publishing New IETF YANG Modules
-
-   Currently, IETF publishes YANG modules as extractable code assets
+   IETF currently publishes YANG modules as extractable code assets
    within RFCs.  I.e., the YANG module source text is embedded directly
    in the RFC using CODE BEGINS/ENDS markers, and can be extracted via
-   tooling, such as rfcstrip.  As such, the RFC should be regarded as
-   the canonical reference to any embedded YANG Modules, but copies of
+   tooling, such as rfcstrip.  As such, the RFC is to be regarded as the
+   canonical reference to any embedded YANG Modules.  However, copies of
    the YANG modules are also available in the IANA YANG Module Names
    registry, YANG Catalog, and the YangModels/yang Github repository.
 
    The key components of RFCs containing one or more YANG modules are
    generally:
 
-   *  An overview of the technology that the YANG module(s) cover
+   *  An overview of the technology that the YANG module(s) cover,
 
-   *  A high-level descriptions of key parts (e.g., containers and
-      lists) of the YANG module(s),
+   *  High-level descriptions of key parts (e.g., containers and lists)
+      of the YANG module(s),
 
-   *  YANG tree diagram [RFC8340] output to show the schema structure
-      for the YANG module(s) (sometimes snippets of the tree diagram
-      output, potentially with a full copy in an appendix)
+   *  YANG tree diagram [RFC8340] output to illustrate the schema
+      structure for the YANG module(s).  Note, sometimes this is
+      included as snippets of the module tree diagram output,
+      potentially with a full copy of the module tree ouptut in an
+      appendix.
 
-   *  The YANG module code asset(s)
+   *  The YANG module code asset(s),
 
-   *  Relevant security considerations for the YANG module, and
+   *  Relevant security considerations for using the YANG module, and
 
-   *  Simple examples of using the YANG module demonstrated as instance
+   *  Simple examples of using the YANG module, demonstrated as instance
       data in XML or JSON that conforms to the YANG module schema.
 
-3.2.  Problems with the existing Process
+   The process for updating existing published IETF YANG modules with
+   new content is similar to the IETF process for publishing new YANG
+   modules.  The new additions can be put into updated revision of the
+   original YANG module or as a new augmenting YANG module that only
+   contains the new functionality.  If updating the original YANG module
+   then the normal IETF process would be to create a bis version of the
+   original YANG module RFC.  If the additions are being developed as
+   augmentions in a separate extension YANG module then there is a
+   choice of doing a bis version of the original YANG module RFC, or
+   creating a separate RFC just for the extensions.
+
+   Fixing errors in the YANG module is handled the same as updating the
+   original YANG module via a bis version of the original YANG module
+   RFC.
+
+4.  Problems with the Existing Process
 
    This section lists some of the potential problems with the existing
    IETF process of producing YANG models.  In some cases, althogh the
    approach has issues, it has benefits also.
 
-3.2.1.  Including code in the RFCs.
+4.1.  Including code in the RFCs.
 
-3.2.2.  Inter-dependency between YANG modules.
+4.1.1.  Inter-dependency between YANG modules.
 
    IETF YANG modules are being develeoped independently, but there are
    often dependencies between YANG modules.  Other industry efforts at
@@ -171,7 +185,7 @@ Table of Contents
    related version of the YANG modules at the time, ensure that any
    import dependencies are satisfied.
 
-3.2.3.  A
+4.1.2.  A
 
    YANG 1.0 and YANG 1.1 very strongly encourage only allowing
    backwards-compatible changes to YANG modules.  This is a good
@@ -183,16 +197,16 @@ Table of Contents
    tested, but this approach makes it much harder to make fixes to YANG
    modules.
 
-3.2.4.  The overall RFC process is slow.
+4.1.3.  The overall RFC process is slow.
 
    It takes a long time, and a lot of review, to publish YANG modules
    within the IETF.
 
-3.2.5.  Competition with Industry models.
+4.1.4.  Competition with Industry models.
 
-3.2.6.  Alternative approaches
+4.1.5.  Alternative approaches
 
-3.2.7.  OpenConfig
+4.1.6.  OpenConfig
 
    OpenConfig is an industry led forum for developing network-device
    specific YANG modules.  There is quite a strong functional overlap
@@ -212,7 +226,7 @@ Table of Contents
    they ensure that all related YANG modules are updated as a cohesive
    set of modules.
 
-3.2.8.  Vendor YANG Modules
+4.1.7.  Vendor YANG Modules
 
    Vendors publish YANG modules with much higher frequency and less
    stability than IETF YANG modules, with the expectation that providing
@@ -221,7 +235,7 @@ Table of Contents
    non-backwards-compatible changes to YANG modules between releases, as
    the models evolve and as they fix issues.
 
-3.2.9.  All updates to the YANG modules require a new RFC to be
+4.1.8.  All updates to the YANG modules require a new RFC to be
         published.
 
    The key aspect of the description above is that the YANG module
@@ -229,7 +243,7 @@ Table of Contents
    revision of the YANG module (even for a small fix) requires a new RFC
    to be issued.
 
-3.2.10.  YANG versioning and backwards compatibilty
+4.1.9.  YANG versioning and backwards compatibilty
 
    YANG 1[RFC6020] and 1.1[RFC7950] both adopt a model where the only
    changes to a module that are allowed are backwards compatible
@@ -237,7 +251,7 @@ Table of Contents
    via a formal deprecation and obsoletion process.  Deprecated and
    obsoleted nodes are retained in the modules.
 
-3.2.11.  Running Code
+4.1.10.  Running Code
 
    Ideally there are implementations to validate the YANG models that
    are being standardized.  By definition these implementations must be
@@ -255,7 +269,7 @@ Table of Contents
    the normal deprecation cycle) when moving from pre-release to
    published standard versions.
 
-3.2.12.  Handling Errata
+4.1.11.  Handling Errata
 
    The RFC editor provides a mechansim for reporting errata against
    RFCs, but this mechanism cannot be usefully used to fix mistakes in
@@ -300,9 +314,9 @@ Table of Contents
    Historically, IETF has published YANG models as code assets embedded
    within.  TODO Introduction
 
-4.  Proposals
+5.  Proposals
 
-4.1.  Take YANG modules out of RFCs
+5.1.  Take YANG modules out of RFCs
 
    The proposal is to stop publish YANG modules in RFCs.  YANG related
    RFCs would still contain the descriptive prose documenting the
@@ -319,20 +333,20 @@ Table of Contents
 
    Hence, the proposal is that RFCs defining YANG modules would contain:
 
-   *  An overview of the technology that the YANG module(s) cover.
+   *  An overview of the technology that the YANG module(s) cover,
 
    *  High-level descriptions of key parts (e.g., containers and lists)
-      of the YANG module(s)
+      of the YANG module(s),
 
-   *  Snippets of tree output that describe the structure
+   *  Snippets of tree output that describe the structure,
 
    *  A reference to latest version of the YANG module associated with
-      the RFC (held in IANA)
+      the RFC (held in IANA),
 
    *  A reference to the tree output (automatically generated)
-      associated with the latest version of hte YANG module.
+      associated with the latest version of hte YANG module,
 
-   *  Security considerations relevant to the use of the YANG module.
+   *  Security considerations relevant to the use of the YANG module,
 
    *  Examples for using the YANG module.
 
@@ -341,22 +355,28 @@ Table of Contents
    (perhaps to 80 or 120 characters), which may faciliate a minor
    improvement to YANG module readability.
 
-5.  Procedures for managing YANG modules within the IETF
+6.  Procedures for managing YANG modules within the IETF
 
-5.1.  Maintaining stable references (IANA)
+6.1.  Maintaining stable references (IANA)
 
    IANA already maintains the "YANG Module Names" Registry.
 
-   The YANG Module Names registry contains: - An entry for the latest
-   revision of each IANA maintained YANG module (e.g., iana-if-
-   types.yang) - An entry for every revision of each YANG module
-   published in an RFC. (e.g., there are 2 copies of ietf-
-   interfaes.yang, published in [RFC7223] and [RFC8343])
+   The YANG Module Names registry contains:
+
+   *  An entry for the latest revision of each IANA maintained YANG
+      module (e.g., iana-if-types.yang)
+
+   *  An entry for every revision of each YANG module published in an
+      RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published
+      in [RFC7223] and [RFC8343])
 
    Each entry in the YANG Module Names registry has fields that include:
-   - the module name (not necessarily unique) - a link to the module
-   revision YANG module source code - a reference to the RFC that
-   contains the module.
+
+   *  the module name (not necessarily unique)
+
+   *  a link to the module revision YANG module source code
+
+   *  a reference to the RFC that contains the module.
 
    It would be helpful to have an IANA registry that contains a
    reference to every revision of a YANG module published by the IETF or
@@ -366,7 +386,7 @@ Table of Contents
 
    a registry of the latest version of YANG modules
 
-5.2.  Standardizing new YANG modules within the IETF
+6.2.  Standardizing new YANG modules within the IETF
 
    New YANG modules would follow the same process that is followed
    today, with the same level of technical review and consensus check at
@@ -378,9 +398,9 @@ Table of Contents
    automatically removed when the document is published.  TODO, would
    this reintroduce the line limit issue again?
 
-5.3.  Enhancing existing YANG modules with new functionality
+6.3.  Enhancing existing YANG modules with new functionality
 
-5.4.  Applying small fixes to IETF YANG modules
+6.4.  Applying small fixes to IETF YANG modules
 
    The goal is to define a lightweight process (similar to how errata
    against RFCs are handled) should be able to apply small bugfix sized
@@ -426,12 +446,12 @@ Table of Contents
    If we enact this change then there are further changes that would go
    along side it:
 
-5.4.1.  IANA YANG Module References
+6.4.1.  IANA YANG Module References
 
    If a YANG module changes significantly, e.g., a large quantity of new
    functionality is added to the.
 
-5.5.  Living Bis Documents
+6.5.  Living Bis Documents
 
    The proposal to move the YANG module.
 
@@ -439,11 +459,11 @@ Table of Contents
 
    IANA & Github rather than in RFCs.
 
-5.6.  M
+6.6.  M
 
    One added benefit.
 
-6.  Security Considerations
+7.  Security Considerations
 
    For the purposes of this document, the pertinent security
    considerations are really about managing the code assets and related.
@@ -452,15 +472,15 @@ Table of Contents
    YANG modules that are published as having some level of IETF
    consensus without.
 
-7.  IANA Considerations
+8.  IANA Considerations
 
    TBD.
 
    This document has no IANA actions.
 
-8.  References
+9.  References
 
-8.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -475,7 +495,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-8.2.  Informative References
+9.2.  Informative References
 
    [RFC6020]  Bjorklund, M., Ed., "YANG - A Data Modeling Language for
               the Network Configuration Protocol (NETCONF)", RFC 6020,
