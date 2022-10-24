@@ -179,7 +179,7 @@ TODO - If we allow for 'latest development' versions of YANG modules, then we ma
 
 # New Procedures for managing YANG modules within the IETF
 
-Further updates required.
+TODO - Further updates required.
 
 ## Standardizing new YANG modules within the IETF
 
