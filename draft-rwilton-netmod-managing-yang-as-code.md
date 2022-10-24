@@ -95,7 +95,7 @@ OpenConfig has also taken a different approach to how their develop their YANG m
 
 ### Vendor YANG Modules
 
-Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues. 
+Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues.
 
 ### All updates to the YANG modules require a new RFC to be published.
 
@@ -117,7 +117,7 @@ Generally, YANG encourages only backwards-compatible changes to YANG models, but
 
 The RFC editor provides a mechansim for reporting errata against RFCs, but this mechanism cannot be usefully used to fix mistakes in YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published.
 
-This is a high-level description of what the module covers. 
+This is a high-level description of what the module covers.
 
 Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
 
@@ -125,15 +125,15 @@ Within the IETF, development of YANG modules is generally deferred to the WGs re
 
 There are several advantages to the IETF process used to develop YANG modules:
 
-Protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in 
+Protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in.
 
 The IETF process of developing YANG modules has several advantages:
 
-The work to generate these YANG models is delegated 
+The work to generate these YANG models is delegated.
 
 Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.
 
-Historically, IETF has published YANG models as code assets embedded within 
+Historically, IETF has published YANG models as code assets embedded within.
 TODO Introduction
 
 # Proposals
@@ -144,7 +144,7 @@ The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would s
 
 Hence, the proposal is that RFCs defining YANG modules would contain:
 - An overview of the technology that the YANG module(s) cover.
-- High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s) 
+- High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s)
 - Snippets of tree output that describe the structure
 - A reference to latest version of the YANG module associated with the RFC (held in IANA)
 - A reference to the tree output (automatically generated) associated with the latest version of hte YANG module.
@@ -171,7 +171,7 @@ Each entry in the YANG Module Names registry has fields that include:
 It would be helpful to have an IANA registry that contains a reference to every revision of a YANG module published by the IETF or IANA.
 
 
-that maintains separate entries for each version of 
+that maintains separate entries for each version of
 
 a registry of the latest version of YANG modules
 
@@ -193,7 +193,7 @@ Not all WGs have to follow exactly the same process, but defining a common, best
 
 An alternative process.
 
-The proposed experiment would use github to track. 
+The proposed experiment would use github to track.
 
 Errata are processed.
 
@@ -219,7 +219,7 @@ If a YANG module changes significantly, e.g., a large quantity of new functional
 
 The proposal to move the YANG module.
 
-The draft would hold. 
+The draft would hold.
 
 IANA & Github rather than in RFCs.
 
