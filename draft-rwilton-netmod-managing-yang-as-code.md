@@ -117,7 +117,7 @@ Generally, YANG encourages only backwards-compatible changes to YANG models, but
 
 The RFC editor provides a mechansim for reporting errata against RFCs, but this mechanism cannot be usefully used to fix mistakes in YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published.
 
-high-level description of what the module covers. 
+This is a high-level description of what the module covers. 
 
 Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
 
