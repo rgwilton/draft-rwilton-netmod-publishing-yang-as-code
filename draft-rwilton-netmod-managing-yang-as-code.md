@@ -35,7 +35,7 @@ informative:
 
 --- abstract
 
-TODO Abstract
+The document highlights some of the issues with how the IETF creates and manages YANG modules and proposes some alternative approaches for standardizing YANG modules, with an aim that some of these could potentially be run as a process experiment.
 
 
 --- middle
