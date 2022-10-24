@@ -75,7 +75,7 @@ This section lists some of the potential problems with the existing IETF process
 
 IETF YANG modules are being develeoped independently, but there are often dependencies between YANG modules.  Other industry efforts at creating common network management APIs take an approach of updating related version of the YANG modules at the time, ensure that any import dependencies are satisfied.
 
-###
+### A
 
 YANG 1.0 and YANG 1.1 very strongly encourage only allowing backwards-compatible changes to YANG modules.  This is a good approach when modules are very stable, but has acted to slow down development of YANG modules within the IETF, where folks are trying to get them to be perfect rather than good enough.
 
@@ -132,17 +132,15 @@ Although, a copy of these modules is made available in YANG Catalog (TODO - Ref)
 Within the IETF, development of YANG modules is generally deferred to the WGs responsible for protocols, which have the necessary technical knowledge to ensure that the models cover the necessary protocol functionality.  In cases where there is no suitable WG is available, then development of the YANG models has come to the NETMOD WG, responsible for the YANG language.  In addition, there is a team of "YANG Doctors" of YANG language experts who perform detailed reviews of YANG modules during the standardization process to ensure that YANG modules are well modelled.
 
 There are several advantages to the IETF process used to develop YANG modules:
-- protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in 
+
+Protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in 
 
 
 The IETF process of developing YANG modules has several advantages:
-  The work to generate these YANG models is delegated 
 
+The work to generate these YANG models is delegated 
 
-
-  Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.
-
-
+ Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.
 
 Historically, IETF has published YANG models as code assets embedded within 
 TODO Introduction
@@ -203,20 +201,20 @@ The process for making fixes to IETF YANG modules (including small non-backwards
 
 Not all WGs have to follow exactly the same process, but defining a common, best practice approach, should generally make it easier for everyone.
 
-An alternative process 
+An alternative process.
 
-The proposed experiment would use github to track 
+The proposed experiment would use github to track. 
 
-Errata are processed 
+Errata are processed.
 
-The proposal is to make use of the existing 
+The proposal is to make use of the existing.
 
-The existing RFC errata process can be used to track bugs against stable published YANG modules
+The existing RFC errata process can be used to track bugs against stable published YANG modules.
 
-Small fixes to published IETF YANG modules are processed in a similar fashion to how the IETF processes errata.  I.e., the responsible Area Director has authority to approve minor fixes 
+Small fixes to published IETF YANG modules are processed in a similar fashion to how the IETF processes errata.  I.e., the responsible Area Director has authority to approve minor fixes.
 
 
-although there is also an IANA registry that eferences and 
+although there is also an IANA registry that eferences and.
 
 embedded the YANG module source in RFCs, where they cannot be updated without publishing a new RFC, not even for a bugfix or an errata.  Instead, the YANG modules would only be stored in an IANA registery, with the draft only maintaining a reference to the latest published version of the YANG module associated with the RFC.
 
