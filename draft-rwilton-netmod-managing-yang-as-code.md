@@ -91,14 +91,14 @@ It takes a long time, and a lot of review, to publish YANG modules within the IE
 
 ### Alternative approaches
 
-#### OpenConfig
+### OpenConfig
 
 OpenConfig is an industry led forum for developing network-device specific YANG modules.  There is quite a strong functional overlap  between OpenConfig and IETF YANG modules, but they have a taken a significantly different approach to solving operational state issues that means that the YANG modules produced by OpenConfig are broadly incompatible with the more approach taken by the IETF with NMDA {{?RFC8342}}.
 
 OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of
 the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.
 
-#### Vendor YANG Modules
+### Vendor YANG Modules
 
 Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues. 
 
