@@ -243,9 +243,3 @@ This document has no IANA actions.
 
 # Acknowledgments
 {:numbered="false"}
-
-# Random stuff
-
-TODO.
-
-YANG Catalog is maintained by the IETF, but the YangModels/yang Github repository contains YANG Modules from other sources, and is industry maintained.
