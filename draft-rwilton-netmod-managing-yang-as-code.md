@@ -92,12 +92,14 @@ It takes a long time, and a lot of review, to publish YANG modules within the IE
 ### Alternative approaches
 
 #### OpenConfig
+
 OpenConfig is an industry led forum for developing network-device specific YANG modules.  There is quite a strong functional overlap  between OpenConfig and IETF YANG modules, but they have a taken a significantly different approach to solving operational state issues that means that the YANG modules produced by OpenConfig are broadly incompatible with the more approach taken by the IETF with NMDA {{?RFC8342}}.
 
 OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of
 the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.
 
 #### Vendor YANG Modules
+
 Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues. 
 
 
@@ -110,6 +112,7 @@ The key aspect of the description above is that the YANG module itself is embedd
 YANG 1{{?RFC6020}} and 1.1{{!RFC7950}} both adopt a model where the only changes to a module that are allowed are backwards compatible changes.  All non-backwards-compatible changes are disallowed, except via a formal deprecation and obsoletion process.  Deprecated and obsoleted nodes are retained in the modules.
 
 ### Running Code
+
 Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.
 
 For IETF YANG modules, they can be pre-standard for a long period of time, meaning that live deployments may be based around them.
@@ -133,10 +136,6 @@ There are several advantages to the IETF process used to develop YANG modules:
 
 
 The IETF process of developing YANG modules has several advantages:
- - 
-
-
-
   The work to generate these YANG models is delegated 
 
 
@@ -152,6 +151,7 @@ TODO Introduction
 # Proposals
 
 ## Take YANG modules out of RFCs
+
 The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would still contain the descriptive prose documenting the structure and meaning of the schema defined in the YANG module, but the full YANG module text and the full YANG tree diagram would no longer be published in RFCs.  Instead, YANG modules should be managed for what they are, i.e., code assets that are used to build network management APIs and associated documentation.   The RFC would instead contain stable references to (i) the YANG module revision associated with the RFC at the time of publication, and (ii) the latest bugfixed version of the YANG module associated with the RFC.  TODO, would it be helpful to also have a reference to the latest "developmental" version of the YANG module?
 
 Hence, the proposal is that RFCs defining YANG modules would contain:
