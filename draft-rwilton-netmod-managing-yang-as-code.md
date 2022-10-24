@@ -19,7 +19,7 @@ venue:
   type: "Working Group"
   mail: "netmod@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/netmod/"
-  github: "rgwilton/draft-wilton-netmod-publishing-yang-as-code"
+  github: "rgwilton/draft-rwilton-netmod-publishing-yang-as-code"
   latest: "https://rgwilton.github.io/draft-rwilton-netmod-publishing-yang-as-code/draft-rwilton-netmod-managing-yang-as-code.html"
 
 author:
