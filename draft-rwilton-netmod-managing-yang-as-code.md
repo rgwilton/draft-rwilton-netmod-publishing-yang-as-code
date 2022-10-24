@@ -226,27 +226,27 @@ If we enact this change then there are further changes that would go along side 
 
 ### IANA YANG Module References
 
-If a YANG module changes significantly, e.g., a large quantity of new functionality is added to the 
+If a YANG module changes significantly, e.g., a large quantity of new functionality is added to the.
 
 ## Living Bis Documents
 
-The proposal to move the YANG module 
+The proposal to move the YANG module.
 
-The draft would hold 
+The draft would hold. 
 
- IANA & Github rather than in RFCs.
+IANA & Github rather than in RFCs.
 
 ## M
 
-One added benefit 
+One added benefit.
 
 
 
 # Security Considerations
 
-For the purposes of this document, the pertinent security considerations are really about managing the code assets and related 
+For the purposes of this document, the pertinent security considerations are really about managing the code assets and related.
 
-Really about whether it is possible for a bad actor to modify the YANG modules that are published as having some level of IETF consensus without
+Really about whether it is possible for a bad actor to modify the YANG modules that are published as having some level of IETF consensus without.
 
 
 
