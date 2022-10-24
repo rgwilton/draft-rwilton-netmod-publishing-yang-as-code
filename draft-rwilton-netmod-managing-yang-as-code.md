@@ -143,13 +143,14 @@ TODO Introduction
 The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would still contain the descriptive prose documenting the structure and meaning of the schema defined in the YANG module, but the full YANG module text and the full YANG tree diagram would no longer be published in RFCs.  Instead, YANG modules should be managed for what they are, i.e., code assets that are used to build network management APIs and associated documentation.   The RFC would instead contain stable references to (i) the YANG module revision associated with the RFC at the time of publication, and (ii) the latest bugfixed version of the YANG module associated with the RFC.  TODO, would it be helpful to also have a reference to the latest "developmental" version of the YANG module?
 
 Hence, the proposal is that RFCs defining YANG modules would contain:
- - An overview of the technology that the YANG module(s) cover.
- - High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s)
- - Snippets of tree output that describe the structure
- - A reference to latest version of the YANG module associated with the RFC (held in IANA)
- - A reference to the tree output (automatically generated) associated with the latest version of hte YANG module.
- - Security considerations relevant to the use of the YANG module.
- - Examples for using the YANG module.
+
+* An overview of the technology that the YANG module(s) cover.
+* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s)
+* Snippets of tree output that describe the structure
+* A reference to latest version of the YANG module associated with the RFC (held in IANA)
+* A reference to the tree output (automatically generated) associated with the latest version of hte YANG module.
+* Security considerations relevant to the use of the YANG module.
+* Examples for using the YANG module.
 
 One additional minor benefit of taking the YANG module out of the RFC could be to increase the column length limit for IETF YANG modules (perhaps to 80 or 120 characters), which may faciliate a minor improvement to YANG module readability.
 
