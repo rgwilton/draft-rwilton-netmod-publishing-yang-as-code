@@ -105,7 +105,7 @@ The key aspect of the description above is that the YANG module itself is embedd
 
 ### YANG versioning and backwards compatibilty
 
-YANG 1{{?RF6020}} and 1.1{{!RFC7950}} both adopt a model where the only changes to a module that are allowed are backwards compatible changes.  All non-backwards-compatible changes are disallowed, except via a formal deprecation and obsoletion process.  Deprecated and obsoleted nodes are retained in the modules.
+YANG 1{{?RFC6020}} and 1.1{{!RFC7950}} both adopt a model where the only changes to a module that are allowed are backwards compatible changes.  All non-backwards-compatible changes are disallowed, except via a formal deprecation and obsoletion process.  Deprecated and obsoleted nodes are retained in the modules.
 
 ### Running Code
 Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.
@@ -122,7 +122,7 @@ The RFC editor provides a mechansim for reporting errata against RFCs, but this 
 high-level description of what the module covers, 
 
 
-  Although, a copy of these modules is made available in YANG Catalog {{?YANG Catalog=RFC8525}}, on Github [TODO - Ref], the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
+  Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
 
 Within the IETF, development of YANG modules is generally deferred to the WGs responsible for protocols, which have the necessary technical knowledge to ensure that the models cover the necessary protocol functionality.  In cases where there is no suitable WG is available, then development of the YANG models has come to the NETMOD WG, responsible for the YANG language.  In addition, there is a team of "YANG Doctors" of YANG language experts who perform detailed reviews of YANG modules during the standardization process to ensure that YANG modules are well modelled.
 
