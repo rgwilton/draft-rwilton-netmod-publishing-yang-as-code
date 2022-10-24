@@ -62,7 +62,7 @@ The key components of RFCs containing one or more YANG modules are generally:
 * Relevant security considerations for using the YANG module, and
 * Simple examples of using the YANG module, demonstrated as instance data in XML or JSON that conforms to the YANG module schema.
 
-Normally responsiblity for creating and maintaining IETF YANG modules is devolved to the WG responsible for the associated protocols.  YANG Doctors help review the YANG modules produced by other WGs and areas to improve the quality of the data models.
+Within the IETF, development of YANG modules is generally deferred to the WGs responsible for protocols, which have the necessary technical knowledge to ensure that the models cover the necessary protocol functionality.  In cases where there is no suitable WG is available, then development of the YANG models has come to the NETMOD WG, responsible for the YANG language.  In addition, there is a team of "YANG Doctors" of YANG language experts who perform detailed reviews of YANG modules during the standardization process to ensure that YANG modules are well modelled.
 
 The process for updating existing published IETF YANG modules with new content is similar to the IETF process for publishing new YANG modules.  The new additions can be put into updated revision of the original YANG module or as a new augmenting YANG module that only contains the new functionality.  If updating the original YANG module then the normal IETF process would be to create a bis version of the original YANG module RFC.  If the additions are being developed as augmentions in a separate extension YANG module then there is a choice of doing a bis version of the original YANG module RFC, or creating a separate RFC just for the extensions.
 
@@ -71,6 +71,8 @@ Fixing errors in the YANG module is handled the same as updating the original YA
 
 # Benefits and Downsides of IETF Standardization Process for YANG
 
+## Benefits
+
 Some of the benefits of the existing IETF YANG module standardization process are:
 
 * Domain experts help create the YANG modules
@@ -78,12 +80,14 @@ Some of the benefits of the existing IETF YANG module standardization process ar
 * There is only a very gradual change to the YANG modules (due to the latency in the IETF standardization process)
 * It follow the same process as for all other IETF output (i.e., RFCs)
 
+## Downsides
+
 There are also some downsides of the existing IETF YANG module standarization process:
 
 * The process take a very long time to standard IETF YANG modules, significantly damaging market adoption.
 * IETF YANG modules for different protocols and features are being develeoped smei-independently, but there are often dependencies between YANG modules, which are hard to manage within the current IETF process.
 * There is no effective work to ensure that IETF YANG modules work together as a coherent network management configuration API will all of the extra (not protocol configuration) also modelled.
-* The RFC errata mechanism doesn't really work effectively for YANG modules, and hence it requires a lot of time and effort to even make small fixes to the modules because it requires new RFCs to be published.
+* The RFC errata mechanism doesn't really work effectively for YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata in IETF YANG modules are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published with an updated YANG module revision.
 * Including the code in the RFCs imposes a lower line length limit that would normally be used on code assets, potentially reducing their readability.  E.g., if the YANG modules were not being put in RFCs, then I doubt that anyone would format them to anything less than 80 characters.
 
 ## Alternative industry approaches
@@ -92,7 +96,79 @@ There are also some downsides of the existing IETF YANG module standarization pr
 
 OpenConfig is an industry led forum for developing network-device specific YANG modules.  There is quite a strong functional overlap  between OpenConfig and IETF YANG modules, but they have a taken a significantly different approach to solving operational state issues that means that the YANG modules produced by OpenConfig are broadly incompatible with the more approach taken by the IETF with NMDA {{?RFC8342}}.
 
-OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.
+OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules that work together.
+
+
+# Suggestions for how IETF could manage YANG
+
+This second contains some proposals on how IETF process for managing YANG modules could change that may be more effect that the current process.
+
+## Take YANG modules out of RFCs
+
+The core proposal is to stop publish YANG modules verbatim in RFCs.  YANG related RFCs would still contain the descriptive prose documenting the structure and meaning of the schema defined in the YANG modules, but the full YANG module texts and the full YANG tree diagrams would no longer be published in RFCs.  Instead, YANG modules should be managed for what they are, i.e., code assets that are used to build network management APIs and associated documentation.  Hence, the RFC would only contain stable references to the code assets and generated tree diagrams rather than having them embedded directly in the document, where they cannot change.
+
+Hence, the proposal is that RFCs defining YANG modules would contain:
+
+* An overview of the technology that the YANG module(s) cover,
+* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
+* Snippets of tree output that describe the structure,
+* A stable reference to the YANG module revision associated with the RFC at the time of publication
+* A stable reference to the latest bugfixed version of the YANG module associated with the RFC - logically the YANG module with errata applied.
+* A reference to latest version of the YANG module associated with the RFC (held in IANA),
+* A reference to the tree output (automatically generated) associated with the latest version of hte YANG module,
+* Security considerations relevant to the use of the YANG module,
+* Examples for using the YANG module.
+
+One additional minor benefit of taking the YANG module out of the RFC could be to increase the column length limit for IETF YANG modules (perhaps to something between 80 and 120 characters), which may faciliate a minor improvement to YANG module readability.
+
+## Maintaining stable references (IANA)
+
+IANA already maintains the "YANG Module Names" Registry.
+
+The YANG Module Names registry contains:
+
+* An entry for the latest revision of each IANA maintained YANG module (e.g., iana-if-types.yang)
+* An entry for every revision of each YANG module published in an RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published in {{?RFC7223}} and {{?RFC8343}})
+
+
+Each entry in the YANG Module Names registry has fields that include:
+
+* the module name (not necessarily unique)
+* a link to the module revision YANG module source code
+* a reference to the RFC that contains the module.
+
+The proposal is to evolve the IANA registries for YANG modules to acheive the following goals:
+
+* Allow IANA to become the permanent canonical reference for YANG modules associated with RFCs, both the initial revision published at the same time as the RFC, and any bugfix updates.
+* Allow IANA to track all multiple YANG module revisions with for one RFC (i.e., if bugfixes have been applied to a YANG module).
+* Allow IANA to provide a per RFC stable reference to the latest bugfixed version of a YANG module that can be embedded in the RFC.
+* TODO - IANA should also maintain tree diagram information, but which revisions of other modules should the tree ouptut be generated from.
+
+## Ensure that models don't change at late phases of the IETF review cycle.
+
+Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.
+
+For IETF YANG modules, they can be pre-standard for a long period of time, meaning that live deployments may be based around them.
+
+Generally, YANG encourages only backwards-compatible changes to YANG models, but this doesn't appy to pre-release versions.  Meaning that devices and clients have to manage these breaking changes (without the normal deprecation cycle) when moving from pre-release to published standard versions.
+
+## Make use of YANG versioning and allow breaking changes.
+
+## Make use of YANG packages to build 
+
+## Manage development versions of IETF YANG modules on github.
+
+## Living YANG documents and Living YANG bis documents.
+
+
+
+
+
+
+
+
+
+
 
 ### Inter-dependency between YANG modules.
 
@@ -120,21 +196,16 @@ YANG 1{{?RFC6020}} and 1.1{{!RFC7950}} both adopt a model where the only changes
 
 ### Running Code
 
-Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.
 
-For IETF YANG modules, they can be pre-standard for a long period of time, meaning that live deployments may be based around them.
 
-Generally, YANG encourages only backwards-compatible changes to YANG models, but this doesn't appy to pre-release versions.  Meaning that devices and clients have to manage these breaking changes (without the normal deprecation cycle) when moving from pre-release to published standard versions.
 
-### Handling Errata
 
-The RFC editor provides a mechansim for reporting errata against RFCs, but this mechanism cannot be usefully used to fix mistakes in YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published.
+
 
 This is a high-level description of what the module covers.
 
 Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
 
-Within the IETF, development of YANG modules is generally deferred to the WGs responsible for protocols, which have the necessary technical knowledge to ensure that the models cover the necessary protocol functionality.  In cases where there is no suitable WG is available, then development of the YANG models has come to the NETMOD WG, responsible for the YANG language.  In addition, there is a team of "YANG Doctors" of YANG language experts who perform detailed reviews of YANG modules during the standardization process to ensure that YANG modules are well modelled.
 
 There are several advantages to the IETF process used to develop YANG modules:
 
@@ -149,48 +220,11 @@ Although this approach has several benefits, i.e., following established practic
 Historically, IETF has published YANG models as code assets embedded within.
 TODO Introduction
 
-# Proposals
 
-## Take YANG modules out of RFCs
-
-The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would still contain the descriptive prose documenting the structure and meaning of the schema defined in the YANG module, but the full YANG module text and the full YANG tree diagram would no longer be published in RFCs.  Instead, YANG modules should be managed for what they are, i.e., code assets that are used to build network management APIs and associated documentation.   The RFC would instead contain stable references to (i) the YANG module revision associated with the RFC at the time of publication, and (ii) the latest bugfixed version of the YANG module associated with the RFC.  TODO, would it be helpful to also have a reference to the latest "developmental" version of the YANG module?
-
-Hence, the proposal is that RFCs defining YANG modules would contain:
-
-* An overview of the technology that the YANG module(s) cover,
-* High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
-* Snippets of tree output that describe the structure,
-* A reference to latest version of the YANG module associated with the RFC (held in IANA),
-* A reference to the tree output (automatically generated) associated with the latest version of hte YANG module,
-* Security considerations relevant to the use of the YANG module,
-* Examples for using the YANG module.
-
-One additional minor benefit of taking the YANG module out of the RFC could be to increase the column length limit for IETF YANG modules (perhaps to 80 or 120 characters), which may faciliate a minor improvement to YANG module readability.
 
 # Procedures for managing YANG modules within the IETF
 
-## Maintaining stable references (IANA)
 
-IANA already maintains the "YANG Module Names" Registry.
-
-The YANG Module Names registry contains:
-
-* An entry for the latest revision of each IANA maintained YANG module (e.g., iana-if-types.yang)
-* An entry for every revision of each YANG module published in an RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published in {{?RFC7223}} and {{?RFC8343}})
-
-
-Each entry in the YANG Module Names registry has fields that include:
-
-* the module name (not necessarily unique)
-* a link to the module revision YANG module source code
-* a reference to the RFC that contains the module.
-
-It would be helpful to have an IANA registry that contains a reference to every revision of a YANG module published by the IETF or IANA.
-
-
-that maintains separate entries for each version of
-
-a registry of the latest version of YANG modules
 
 ## Standardizing new YANG modules within the IETF
 
@@ -228,9 +262,7 @@ URL to an updateable reference to the latest published version of the YANG modul
 
 If we enact this change then there are further changes that would go along side it:
 
-### IANA YANG Module References
 
-If a YANG module changes significantly, e.g., a large quantity of new functionality is added to the.
 
 ## Living Bis Documents
 
@@ -246,15 +278,15 @@ One added benefit.
 
 # Security Considerations
 
-For the purposes of this document, the pertinent security considerations are really about managing the code assets and related.
+For the purposes of this document, the pertinent security considerations are really about ensuring the canonical code references for YANG modules are stable and safe from being manipulated by bad actors.  When the canonical version of the YANG module source text was in RFCs then any copies could always be checked against the RFC, that never changes.
 
-Really about whether it is possible for a bad actor to modify the YANG modules that are published as having some level of IETF consensus without.
+Does IANA provide the same level of security guarantee as an RFC does?
+
 
 # IANA Considerations
 
-TBD.
+TBD, probably quite a few, depending on what we do.  Once we have firmed up a bit within the WG, then we should consult with IANA on an early review to see if they are comfortable with the proposed experiments.
 
-This document has no IANA actions.
 
 --- back
 
