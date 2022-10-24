@@ -1,7 +1,7 @@
 ---
 title: "Managing IETF YANG modules as code not documents"
 abbrev: "YANG is code"
-category: experimental
+category: exp
 
 docname: draft-rwilton-netmod-managing-yang-as-code-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
