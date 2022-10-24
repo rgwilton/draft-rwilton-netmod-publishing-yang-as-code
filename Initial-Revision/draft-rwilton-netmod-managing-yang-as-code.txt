@@ -420,7 +420,7 @@ Table of Contents
 
 6.  New Procedures for managing YANG modules within the IETF
 
-   Further updates required.
+   TODO - Further updates required.
 
 6.1.  Standardizing new YANG modules within the IETF
 
