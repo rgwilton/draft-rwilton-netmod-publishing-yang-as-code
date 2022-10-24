@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Managing IETF YANG modules as code not documents</title>
+<meta content="Robert Wilton" name="author">
+<meta content="
+       TODO Abstract 
+    " name="description">
+<meta content="xml2rfc 3.15.1" name="generator">
+<meta content="YANG" name="keyword">
+<meta content="Process experiment" name="keyword">
+<meta content="draft-rwilton-netmod-managing-yang-as-code-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.15.1
+    Python 3.10.5
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    kitchen 1.2.6
+    lxml 4.9.1
+    MarkupSafe 2.1.1
+    pycountry 22.3.5
+    PyYAML 6.0
+    requests 2.27.1
+    setuptools 59.4.0
+    six 1.16.0
+-->
+<link href="draft-rwilton-netmod-managing-yang-as-code.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+:is(ol, ul) :is(ol, ul) {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+  min-width: 12ch;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:first-child, .break:first-child + *) {
+  margin-top: 0;
+}
+:is(dl.compact, .dlCompact) > dd > :is(:last-child) {
+  margin-bottom: 0;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+dl .break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href].selfRef {
+  color: var(--text-color);
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    overflow-x: auto;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: 14.5px;
+}
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  min-width: var(--identifier-width);
+  clear: left;
+  float: left;
+  text-align: right;
+}
+#identifiers dd {
+  margin: 0;
+  margin-left: calc(1em + var(--identifier-width)) !important;
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dt:target::before {
+  content: "⇒";
+  width: 15px;
+  margin: 0 10px 0 -25px;
+}
+.references dd {
+  margin-left: 8em !important;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul :is(p, li) {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  dd {
+    page-break-before: avoid;
+  }
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([stroke="fill"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">YANG is code</td>
+<td class="right">October 2022</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Wilton</td>
+<td class="center">Expires 27 April 2023</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Modeling</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-rwilton-netmod-managing-yang-as-code-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2022-10-24" class="published">24 October 2022</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Experimental</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2023-04-27">27 April 2023</time></dd>
+<dt class="label-authors">Author:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">R. Wilton</div>
+<div class="org">Cisco</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Managing IETF YANG modules as code not documents</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://rgwilton.github.io/draft-rwilton-netmod-publishing-yang-as-code/draft-rwilton-netmod-managing-yang-as-code.html">https://rgwilton.github.io/draft-rwilton-netmod-publishing-yang-as-code/draft-rwilton-netmod-managing-yang-as-code.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-rwilton-netmod-managing-yang-as-code/">https://datatracker.ietf.org/doc/draft-rwilton-netmod-managing-yang-as-code/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Network Modeling Working Group mailing list (<span><a href="mailto:netmod@ietf.org">mailto:netmod@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/netmod/">https://mailarchive.ietf.org/arch/browse/netmod/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/netmod/">https://www.ietf.org/mailman/listinfo/netmod/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/rgwilton/draft-rwilton-netmod-publishing-yang-as-code">https://github.com/rgwilton/draft-rwilton-netmod-publishing-yang-as-code</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 27 April 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2022 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-background" class="internal xref">Background</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-existing-process-for-publis" class="internal xref">Existing Process for publishing New IETF YANG Modules</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-problems-with-the-existing-" class="internal xref">Problems with the existing Process</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+                    <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="auto internal xref">3.2.1</a>.  <a href="#name-including-code-in-the-rfcs" class="internal xref">Including code in the RFCs.</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                    <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="auto internal xref">3.2.2</a>.  <a href="#name-inter-dependency-between-ya" class="internal xref">Inter-dependency between YANG modules.</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+                    <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="auto internal xref">3.2.3</a>.  <a href="#name-a" class="internal xref">A</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.4">
+                    <p id="section-toc.1-1.3.2.2.2.4.1"><a href="#section-3.2.4" class="auto internal xref">3.2.4</a>.  <a href="#name-the-overall-rfc-process-is-" class="internal xref">The overall RFC process is slow.</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.5">
+                    <p id="section-toc.1-1.3.2.2.2.5.1"><a href="#section-3.2.5" class="auto internal xref">3.2.5</a>.  <a href="#name-competition-with-industry-m" class="internal xref">Competition with Industry models.</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.6">
+                    <p id="section-toc.1-1.3.2.2.2.6.1"><a href="#section-3.2.6" class="auto internal xref">3.2.6</a>.  <a href="#name-alternative-approaches" class="internal xref">Alternative approaches</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.7">
+                    <p id="section-toc.1-1.3.2.2.2.7.1"><a href="#section-3.2.7" class="auto internal xref">3.2.7</a>.  <a href="#name-openconfig" class="internal xref">OpenConfig</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.8">
+                    <p id="section-toc.1-1.3.2.2.2.8.1"><a href="#section-3.2.8" class="auto internal xref">3.2.8</a>.  <a href="#name-vendor-yang-modules" class="internal xref">Vendor YANG Modules</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.9">
+                    <p id="section-toc.1-1.3.2.2.2.9.1"><a href="#section-3.2.9" class="auto internal xref">3.2.9</a>.  <a href="#name-all-updates-to-the-yang-mod" class="internal xref">All updates to the YANG modules require a new RFC to be published.</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.10">
+                    <p id="section-toc.1-1.3.2.2.2.10.1"><a href="#section-3.2.10" class="auto internal xref">3.2.10</a>. <a href="#name-yang-versioning-and-backwar" class="internal xref">YANG versioning and backwards compatibilty</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.11">
+                    <p id="section-toc.1-1.3.2.2.2.11.1"><a href="#section-3.2.11" class="auto internal xref">3.2.11</a>. <a href="#name-running-code" class="internal xref">Running Code</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2.2.12">
+                    <p id="section-toc.1-1.3.2.2.2.12.1"><a href="#section-3.2.12" class="auto internal xref">3.2.12</a>. <a href="#name-handling-errata" class="internal xref">Handling Errata</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-proposals" class="internal xref">Proposals</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-take-yang-modules-out-of-rf" class="internal xref">Take YANG modules out of RFCs</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-procedures-for-managing-yan" class="internal xref">Procedures for managing YANG modules within the IETF</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-maintaining-stable-referenc" class="internal xref">Maintaining stable references (IANA)</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-standardizing-new-yang-modu" class="internal xref">Standardizing new YANG modules within the IETF</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-enhancing-existing-yang-mod" class="internal xref">Enhancing existing YANG modules with new functionality</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-applying-small-fixes-to-iet" class="internal xref">Applying small fixes to IETF YANG modules</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.1">
+                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-iana-yang-module-references" class="internal xref">IANA YANG Module References</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-living-bis-documents" class="internal xref">Living Bis Documents</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-m" class="internal xref">M</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">This document proposes that the IETF tries a process experiment for the management and evolution of YANG modules created and published by the IETF.  The goal is the make the process easier and more helpful, allowing YANG modules to be published more quickly without losing the benefits of having a stable and industry respected consensus process.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This is very much a -00 initial draft, and I'm seeking input from the WG as to whether these process changes make sense, input from the chairs as to whether these process changes are helpful.<a href="#section-1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="background">
+<section id="section-3">
+      <h2 id="name-background">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-background" class="section-name selfRef">Background</a>
+      </h2>
+<div id="existing-process-for-publishing-new-ietf-yang-modules">
+<section id="section-3.1">
+        <h3 id="name-existing-process-for-publis">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-existing-process-for-publis" class="section-name selfRef">Existing Process for publishing New IETF YANG Modules</a>
+        </h3>
+<p id="section-3.1-1">Currently, IETF publishes YANG modules as extractable code assets within RFCs.  I.e., the YANG module source text is embedded directly in the RFC using CODE BEGINS/ENDS markers, and can be extracted via tooling, such as rfcstrip.  As such, the RFC should be regarded as the canonical reference to any embedded YANG Modules, but copies of the YANG modules are also available in the IANA YANG Module Names registry, YANG Catalog, and the YangModels/yang Github repository.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The key components of RFCs containing one or more YANG modules are generally:
+ - An overview of the technology that the YANG module(s) cover
+ - A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
+ - YANG tree diagram <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span> output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)
+ - The YANG module code asset(s)
+ - Relevant security considerations for the YANG module, and
+ - Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="problems-with-the-existing-process">
+<section id="section-3.2">
+        <h3 id="name-problems-with-the-existing-">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-problems-with-the-existing-" class="section-name selfRef">Problems with the existing Process</a>
+        </h3>
+<p id="section-3.2-1">This section lists some of the potential problems with the existing IETF process of producing YANG models.  In some cases,  althogh the approach has issues, it has benefits also.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<div id="including-code-in-the-rfcs">
+<section id="section-3.2.1">
+          <h4 id="name-including-code-in-the-rfcs">
+<a href="#section-3.2.1" class="section-number selfRef">3.2.1. </a><a href="#name-including-code-in-the-rfcs" class="section-name selfRef">Including code in the RFCs.</a>
+        </h4>
+</section>
+</div>
+<div id="inter-dependency-between-yang-modules">
+<section id="section-3.2.2">
+          <h4 id="name-inter-dependency-between-ya">
+<a href="#section-3.2.2" class="section-number selfRef">3.2.2. </a><a href="#name-inter-dependency-between-ya" class="section-name selfRef">Inter-dependency between YANG modules.</a>
+          </h4>
+<p id="section-3.2.2-1">IETF YANG modules are being develeoped independently, but there are often dependencies between YANG modules.  Other industry efforts at creating common network management APIs take an approach of updating related version of the YANG modules at the time, ensure that any import dependencies are satisfied.<a href="#section-3.2.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="a">
+<section id="section-3.2.3">
+          <h4 id="name-a">
+<a href="#section-3.2.3" class="section-number selfRef">3.2.3. </a><a href="#name-a" class="section-name selfRef">A</a>
+          </h4>
+<p id="section-3.2.3-1">YANG 1.0 and YANG 1.1 very strongly encourage only allowing backwards-compatible changes to YANG modules.  This is a good approach when modules are very stable, but has acted to slow down development of YANG modules within the IETF, where folks are trying to get them to be perfect rather than good enough.<a href="#section-3.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.3-2">This makes a lot of sense whe, modules are very stable and well-tested, but this approach makes it much harder to make fixes to YANG modules.<a href="#section-3.2.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="the-overall-rfc-process-is-slow">
+<section id="section-3.2.4">
+          <h4 id="name-the-overall-rfc-process-is-">
+<a href="#section-3.2.4" class="section-number selfRef">3.2.4. </a><a href="#name-the-overall-rfc-process-is-" class="section-name selfRef">The overall RFC process is slow.</a>
+          </h4>
+<p id="section-3.2.4-1">It takes a long time, and a lot of review, to publish YANG modules within the IETF.<a href="#section-3.2.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="competition-with-industry-models">
+<section id="section-3.2.5">
+          <h4 id="name-competition-with-industry-m">
+<a href="#section-3.2.5" class="section-number selfRef">3.2.5. </a><a href="#name-competition-with-industry-m" class="section-name selfRef">Competition with Industry models.</a>
+        </h4>
+</section>
+</div>
+<div id="alternative-approaches">
+<section id="section-3.2.6">
+          <h4 id="name-alternative-approaches">
+<a href="#section-3.2.6" class="section-number selfRef">3.2.6. </a><a href="#name-alternative-approaches" class="section-name selfRef">Alternative approaches</a>
+        </h4>
+</section>
+</div>
+<div id="openconfig">
+<section id="section-3.2.7">
+          <h4 id="name-openconfig">
+<a href="#section-3.2.7" class="section-number selfRef">3.2.7. </a><a href="#name-openconfig" class="section-name selfRef">OpenConfig</a>
+          </h4>
+<p id="section-3.2.7-1">OpenConfig is an industry led forum for developing network-device specific YANG modules.  There is quite a strong functional overlap  between OpenConfig and IETF YANG modules, but they have a taken a significantly different approach to solving operational state issues that means that the YANG modules produced by OpenConfig are broadly incompatible with the more approach taken by the IETF with NMDA <span>[<a href="#RFC8342" class="cite xref">RFC8342</a>]</span>.<a href="#section-3.2.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.7-2">OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.<a href="#section-3.2.7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="vendor-yang-modules">
+<section id="section-3.2.8">
+          <h4 id="name-vendor-yang-modules">
+<a href="#section-3.2.8" class="section-number selfRef">3.2.8. </a><a href="#name-vendor-yang-modules" class="section-name selfRef">Vendor YANG Modules</a>
+          </h4>
+<p id="section-3.2.8-1">Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues.<a href="#section-3.2.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="all-updates-to-the-yang-modules-require-a-new-rfc-to-be-published">
+<section id="section-3.2.9">
+          <h4 id="name-all-updates-to-the-yang-mod">
+<a href="#section-3.2.9" class="section-number selfRef">3.2.9. </a><a href="#name-all-updates-to-the-yang-mod" class="section-name selfRef">All updates to the YANG modules require a new RFC to be published.</a>
+          </h4>
+<p id="section-3.2.9-1">The key aspect of the description above is that the YANG module itself is embedded within the RFC, and hence publishing any updated revision of the YANG module (even for a small fix) requires a new RFC to be issued.<a href="#section-3.2.9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="yang-versioning-and-backwards-compatibilty">
+<section id="section-3.2.10">
+          <h4 id="name-yang-versioning-and-backwar">
+<a href="#section-3.2.10" class="section-number selfRef">3.2.10. </a><a href="#name-yang-versioning-and-backwar" class="section-name selfRef">YANG versioning and backwards compatibilty</a>
+          </h4>
+<p id="section-3.2.10-1">YANG 1<span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> and 1.1<span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> both adopt a model where the only changes to a module that are allowed are backwards compatible changes.  All non-backwards-compatible changes are disallowed, except via a formal deprecation and obsoletion process.  Deprecated and obsoleted nodes are retained in the modules.<a href="#section-3.2.10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="running-code">
+<section id="section-3.2.11">
+          <h4 id="name-running-code">
+<a href="#section-3.2.11" class="section-number selfRef">3.2.11. </a><a href="#name-running-code" class="section-name selfRef">Running Code</a>
+          </h4>
+<p id="section-3.2.11-1">Ideally there are implementations to validate the YANG models that are being standardized.  By definition these implementations must be done against pre-standard versions of the YANG modules.  However, the various IETF review processes can mean that there are changes to the names of data nodes, and to the overal structure of the schema before the final RFC gets published.<a href="#section-3.2.11-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.11-2">For IETF YANG modules, they can be pre-standard for a long period of time, meaning that live deployments may be based around them.<a href="#section-3.2.11-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.11-3">Generally, YANG encourages only backwards-compatible changes to YANG models, but this doesn't appy to pre-release versions.  Meaning that devices and clients have to manage these breaking changes (without the normal deprecation cycle) when moving from pre-release to published standard versions.<a href="#section-3.2.11-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="handling-errata">
+<section id="section-3.2.12">
+          <h4 id="name-handling-errata">
+<a href="#section-3.2.12" class="section-number selfRef">3.2.12. </a><a href="#name-handling-errata" class="section-name selfRef">Handling Errata</a>
+          </h4>
+<p id="section-3.2.12-1">The RFC editor provides a mechansim for reporting errata against RFCs, but this mechanism cannot be usefully used to fix mistakes in YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published.<a href="#section-3.2.12-1" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-2">This is a high-level description of what the module covers.<a href="#section-3.2.12-2" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-3">Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.<a href="#section-3.2.12-3" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-4">Within the IETF, development of YANG modules is generally deferred to the WGs responsible for protocols, which have the necessary technical knowledge to ensure that the models cover the necessary protocol functionality.  In cases where there is no suitable WG is available, then development of the YANG models has come to the NETMOD WG, responsible for the YANG language.  In addition, there is a team of "YANG Doctors" of YANG language experts who perform detailed reviews of YANG modules during the standardization process to ensure that YANG modules are well modelled.<a href="#section-3.2.12-4" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-5">There are several advantages to the IETF process used to develop YANG modules:<a href="#section-3.2.12-5" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-6">Protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in.<a href="#section-3.2.12-6" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-7">The IETF process of developing YANG modules has several advantages:<a href="#section-3.2.12-7" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-8">The work to generate these YANG models is delegated.<a href="#section-3.2.12-8" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-9">Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.<a href="#section-3.2.12-9" class="pilcrow">¶</a></p>
+<p id="section-3.2.12-10">Historically, IETF has published YANG models as code assets embedded within.
+TODO Introduction<a href="#section-3.2.12-10" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="proposals">
+<section id="section-4">
+      <h2 id="name-proposals">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-proposals" class="section-name selfRef">Proposals</a>
+      </h2>
+<div id="take-yang-modules-out-of-rfcs">
+<section id="section-4.1">
+        <h3 id="name-take-yang-modules-out-of-rf">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-take-yang-modules-out-of-rf" class="section-name selfRef">Take YANG modules out of RFCs</a>
+        </h3>
+<p id="section-4.1-1">The proposal is to stop publish YANG modules in RFCs.  YANG related RFCs would still contain the descriptive prose documenting the structure and meaning of the schema defined in the YANG module, but the full YANG module text and the full YANG tree diagram would no longer be published in RFCs.  Instead, YANG modules should be managed for what they are, i.e., code assets that are used to build network management APIs and associated documentation.   The RFC would instead contain stable references to (i) the YANG module revision associated with the RFC at the time of publication, and (ii) the latest bugfixed version of the YANG module associated with the RFC.  TODO, would it be helpful to also have a reference to the latest "developmental" version of the YANG module?<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">Hence, the proposal is that RFCs defining YANG modules would contain:
+- An overview of the technology that the YANG module(s) cover.
+- High-level descriptions of key parts (e.g., containers and lists) of the YANG module(s)
+- Snippets of tree output that describe the structure
+- A reference to latest version of the YANG module associated with the RFC (held in IANA)
+- A reference to the tree output (automatically generated) associated with the latest version of hte YANG module.
+- Security considerations relevant to the use of the YANG module.
+- Examples for using the YANG module.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">One additional minor benefit of taking the YANG module out of the RFC could be to increase the column length limit for IETF YANG modules (perhaps to 80 or 120 characters), which may faciliate a minor improvement to YANG module readability.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="procedures-for-managing-yang-modules-within-the-ietf">
+<section id="section-5">
+      <h2 id="name-procedures-for-managing-yan">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-procedures-for-managing-yan" class="section-name selfRef">Procedures for managing YANG modules within the IETF</a>
+      </h2>
+<div id="maintaining-stable-references-iana">
+<section id="section-5.1">
+        <h3 id="name-maintaining-stable-referenc">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-maintaining-stable-referenc" class="section-name selfRef">Maintaining stable references (IANA)</a>
+        </h3>
+<p id="section-5.1-1">IANA already maintains the "YANG Module Names" Registry.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">The YANG Module Names registry contains:
+- An entry for the latest revision of each IANA maintained YANG module (e.g., iana-if-types.yang)
+- An entry for every revision of each YANG module published in an RFC. (e.g., there are 2 copies of ietf-interfaes.yang, published in <span>[<a href="#RFC7223" class="cite xref">RFC7223</a>]</span> and <span>[<a href="#RFC8343" class="cite xref">RFC8343</a>]</span>)<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">Each entry in the YANG Module Names registry has fields that include:
+- the module name (not necessarily unique)
+- a link to the module revision YANG module source code
+- a reference to the RFC that contains the module.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">It would be helpful to have an IANA registry that contains a reference to every revision of a YANG module published by the IETF or IANA.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">that maintains separate entries for each version of<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-6">a registry of the latest version of YANG modules<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="standardizing-new-yang-modules-within-the-ietf">
+<section id="section-5.2">
+        <h3 id="name-standardizing-new-yang-modu">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-standardizing-new-yang-modu" class="section-name selfRef">Standardizing new YANG modules within the IETF</a>
+        </h3>
+<p id="section-5.2-1">New YANG modules would follow the same process that is followed today, with the same level of technical review and consensus check at each phase, with the only differnce being that the module and tree diagrams are referenced rather than included.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">TODO, possibly for review purposes, the tooling could include a copy of the YANG module and module tree ouptut in an appendix, that it automatically removed when the document is published.  TODO, would this reintroduce the line limit issue again?<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="enhancing-existing-yang-modules-with-new-functionality">
+<section id="section-5.3">
+        <h3 id="name-enhancing-existing-yang-mod">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-enhancing-existing-yang-mod" class="section-name selfRef">Enhancing existing YANG modules with new functionality</a>
+      </h3>
+</section>
+</div>
+<div id="applying-small-fixes-to-ietf-yang-modules">
+<section id="section-5.4">
+        <h3 id="name-applying-small-fixes-to-iet">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-applying-small-fixes-to-iet" class="section-name selfRef">Applying small fixes to IETF YANG modules</a>
+        </h3>
+<p id="section-5.4-1">The goal is to define a lightweight process (similar to how errata against RFCs are handled) should be able to apply small bugfix sized changes to published YANG modules.  A key observation is that processing errata does not require a WG or IETF last call, or IESG review.  The decision to approve errata is taken by the AD, judging the consensus of the WG, and in particular the authors of the RFC.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">The process for making fixes to IETF YANG modules (including small non-backwards-compatible changes) should follow an equivalent level of review and consensus check as for processing errata against RFCs.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<p id="section-5.4-3">Not all WGs have to follow exactly the same process, but defining a common, best practice approach, should generally make it easier for everyone.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">An alternative process.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4-5">The proposed experiment would use github to track.<a href="#section-5.4-5" class="pilcrow">¶</a></p>
+<p id="section-5.4-6">Errata are processed.<a href="#section-5.4-6" class="pilcrow">¶</a></p>
+<p id="section-5.4-7">The proposal is to make use of the existing.<a href="#section-5.4-7" class="pilcrow">¶</a></p>
+<p id="section-5.4-8">The existing RFC errata process can be used to track bugs against stable published YANG modules.<a href="#section-5.4-8" class="pilcrow">¶</a></p>
+<p id="section-5.4-9">Small fixes to published IETF YANG modules are processed in a similar fashion to how the IETF processes errata.  I.e., the responsible Area Director has authority to approve minor fixes.<a href="#section-5.4-9" class="pilcrow">¶</a></p>
+<p id="section-5.4-10">although there is also an IANA registry that eferences and.<a href="#section-5.4-10" class="pilcrow">¶</a></p>
+<p id="section-5.4-11">embedded the YANG module source in RFCs, where they cannot be updated without publishing a new RFC, not even for a bugfix or an errata.  Instead, the YANG modules would only be stored in an IANA registery, with the draft only maintaining a reference to the latest published version of the YANG module associated with the RFC.<a href="#section-5.4-11" class="pilcrow">¶</a></p>
+<p id="section-5.4-12">URL to an updateable reference to the latest published version of the YANG modules associated with the RFC.<a href="#section-5.4-12" class="pilcrow">¶</a></p>
+<p id="section-5.4-13">If we enact this change then there are further changes that would go along side it:<a href="#section-5.4-13" class="pilcrow">¶</a></p>
+<div id="iana-yang-module-references">
+<section id="section-5.4.1">
+          <h4 id="name-iana-yang-module-references">
+<a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-iana-yang-module-references" class="section-name selfRef">IANA YANG Module References</a>
+          </h4>
+<p id="section-5.4.1-1">If a YANG module changes significantly, e.g., a large quantity of new functionality is added to the.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="living-bis-documents">
+<section id="section-5.5">
+        <h3 id="name-living-bis-documents">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-living-bis-documents" class="section-name selfRef">Living Bis Documents</a>
+        </h3>
+<p id="section-5.5-1">The proposal to move the YANG module.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-2">The draft would hold.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
+<p id="section-5.5-3">IANA &amp; Github rather than in RFCs.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="m">
+<section id="section-5.6">
+        <h3 id="name-m">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-m" class="section-name selfRef">M</a>
+        </h3>
+<p id="section-5.6-1">One added benefit.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">For the purposes of this document, the pertinent security considerations are really about managing the code assets and related.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Really about whether it is possible for a bad actor to modify the YANG modules that are published as having some level of IETF consensus without.<a href="#section-6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-7">
+      <h2 id="name-iana-considerations">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-7-1">TBD.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">This document has no IANA actions.<a href="#section-7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-8">
+      <h2 id="name-references">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-8.1">
+        <h3 id="name-normative-references">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7950">https://www.rfc-editor.org/rfc/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-8.2">
+        <h3 id="name-informative-references">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC6020">[RFC6020]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7223">[RFC7223]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refTitle">"A YANG Data Model for Interface Management"</span>, <span class="seriesInfo">RFC 7223</span>, <span class="seriesInfo">DOI 10.17487/RFC7223</span>, <time datetime="2014-05" class="refDate">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7223">https://www.rfc-editor.org/rfc/rfc7223</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8340">https://www.rfc-editor.org/rfc/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8342">[RFC8342]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refAuthor">Schoenwaelder, J.</span>, <span class="refAuthor">Shafer, P.</span>, <span class="refAuthor">Watsen, K.</span>, and <span class="refAuthor">R. Wilton</span>, <span class="refTitle">"Network Management Datastore Architecture (NMDA)"</span>, <span class="seriesInfo">RFC 8342</span>, <span class="seriesInfo">DOI 10.17487/RFC8342</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8342">https://www.rfc-editor.org/rfc/rfc8342</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8343">[RFC8343]</dt>
+      <dd>
+<span class="refAuthor">Bjorklund, M.</span>, <span class="refTitle">"A YANG Data Model for Interface Management"</span>, <span class="seriesInfo">RFC 8343</span>, <span class="seriesInfo">DOI 10.17487/RFC8343</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8343">https://www.rfc-editor.org/rfc/rfc8343</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="acknowledgments">
+<section id="appendix-A">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+    </h2>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-B">
+      <h2 id="name-authors-address">
+<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Robert Wilton</span></div>
+<div dir="auto" class="left"><span class="org">Cisco</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:rwilton@cisco.com" class="email">rwilton@cisco.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
