@@ -1286,13 +1286,21 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-existing-process-for-publis" class="section-name selfRef">Existing Process for publishing New IETF YANG Modules</a>
         </h3>
 <p id="section-3.1-1">Currently, IETF publishes YANG modules as extractable code assets within RFCs.  I.e., the YANG module source text is embedded directly in the RFC using CODE BEGINS/ENDS markers, and can be extracted via tooling, such as rfcstrip.  As such, the RFC should be regarded as the canonical reference to any embedded YANG Modules, but copies of the YANG modules are also available in the IANA YANG Module Names registry, YANG Catalog, and the YangModels/yang Github repository.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">The key components of RFCs containing one or more YANG modules are generally:
- * An overview of the technology that the YANG module(s) cover
- * A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),
- * YANG tree diagram <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span> output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)
- * The YANG module code asset(s)
- * Relevant security considerations for the YANG module, and
- * Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The key components of RFCs containing one or more YANG modules are generally:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-3.1">An overview of the technology that the YANG module(s) cover<a href="#section-3.1-3.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-3.2">A high-level descriptions of key parts (e.g., containers and lists) of the YANG module(s),<a href="#section-3.1-3.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-3.3">YANG tree diagram <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span> output to show the schema structure for the YANG module(s) (sometimes snippets of the tree diagram output, potentially with a full copy in an appendix)<a href="#section-3.1-3.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-3.4">The YANG module code asset(s)<a href="#section-3.1-3.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-3.5">Relevant security considerations for the YANG module, and<a href="#section-3.1-3.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-3.1-3.6">Simple examples of using the YANG module demonstrated as instance data in XML or JSON that conforms to the YANG module schema.<a href="#section-3.1-3.6" class="pilcrow">¶</a>
+</li>
+        </ul>
 </section>
 </div>
 <div id="problems-with-the-existing-process">

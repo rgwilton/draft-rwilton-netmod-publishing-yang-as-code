@@ -137,15 +137,23 @@ Table of Contents
    registry, YANG Catalog, and the YangModels/yang Github repository.
 
    The key components of RFCs containing one or more YANG modules are
-   generally: * An overview of the technology that the YANG module(s)
-   cover * A high-level descriptions of key parts (e.g., containers and
-   lists) of the YANG module(s), * YANG tree diagram [RFC8340] output to
-   show the schema structure for the YANG module(s) (sometimes snippets
-   of the tree diagram output, potentially with a full copy in an
-   appendix) * The YANG module code asset(s) * Relevant security
-   considerations for the YANG module, and * Simple examples of using
-   the YANG module demonstrated as instance data in XML or JSON that
-   conforms to the YANG module schema.
+   generally:
+
+   *  An overview of the technology that the YANG module(s) cover
+
+   *  A high-level descriptions of key parts (e.g., containers and
+      lists) of the YANG module(s),
+
+   *  YANG tree diagram [RFC8340] output to show the schema structure
+      for the YANG module(s) (sometimes snippets of the tree diagram
+      output, potentially with a full copy in an appendix)
+
+   *  The YANG module code asset(s)
+
+   *  Relevant security considerations for the YANG module, and
+
+   *  Simple examples of using the YANG module demonstrated as instance
+      data in XML or JSON that conforms to the YANG module schema.
 
 3.2.  Problems with the existing Process
 
