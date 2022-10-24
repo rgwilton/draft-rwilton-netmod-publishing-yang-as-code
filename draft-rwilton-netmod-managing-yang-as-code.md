@@ -69,8 +69,6 @@ This section lists some of the potential problems with the existing IETF process
 
 ### Including code in the RFCs.
 
-
-
 ### Inter-dependency between YANG modules.
 
 IETF YANG modules are being develeoped independently, but there are often dependencies between YANG modules.  Other industry efforts at creating common network management APIs take an approach of updating related version of the YANG modules at the time, ensure that any import dependencies are satisfied.
@@ -81,11 +79,9 @@ YANG 1.0 and YANG 1.1 very strongly encourage only allowing backwards-compatible
 
 This makes a lot of sense whe, modules are very stable and well-tested, but this approach makes it much harder to make fixes to YANG modules.
 
-
 ### The overall RFC process is slow.
 
 It takes a long time, and a lot of review, to publish YANG modules within the IETF.
-
 
 ### Competition with Industry models.
 
@@ -95,13 +91,11 @@ It takes a long time, and a lot of review, to publish YANG modules within the IE
 
 OpenConfig is an industry led forum for developing network-device specific YANG modules.  There is quite a strong functional overlap  between OpenConfig and IETF YANG modules, but they have a taken a significantly different approach to solving operational state issues that means that the YANG modules produced by OpenConfig are broadly incompatible with the more approach taken by the IETF with NMDA {{?RFC8342}}.
 
-OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of
-the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.
+OpenConfig has also taken a different approach to how their develop their YANG modules.  They manage their Device YANG as a versioned set of modules within a single Github project.  They allow some level of breaking changes to the YANG modules to allow the API to evolve and improve more quickly, making use of Semantic Versioning to document where breaking changes have occurred.  New versions of the OpenConfig YANG github repository are pushed approximately every 3 months, where they ensure that all related YANG modules are updated as a cohesive set of modules.
 
 ### Vendor YANG Modules
 
 Vendors publish YANG modules with much higher frequency and less stability than IETF YANG modules, with the expectation that providing some level of programmatic YANG API is better than none at all.  Vendors generally seem to have the expectation that they can make non-backwards-compatible changes to YANG modules between releases, as the models evolve and as they fix issues. 
-
 
 ### All updates to the YANG modules require a new RFC to be published.
 
@@ -123,9 +117,7 @@ Generally, YANG encourages only backwards-compatible changes to YANG models, but
 
 The RFC editor provides a mechansim for reporting errata against RFCs, but this mechanism cannot be usefully used to fix mistakes in YANG modules because accepting an errata would create an ambiguity to exact textual content of the YANG module for a given YANG module revision.  Hence, valid errata are always maked as "Hold for Doc Update" waiting for a new bis version of the RFC to be published.
 
-
 high-level description of what the module covers. 
-
 
 Although, a copy of these modules is made available in YANG Catalog (TODO - Ref), on Github (TODO - Ref), the canonical reference for these YANG modules is the RFCs containing the YANG module.  Other organizations (includings SDOs and Industry bodies) have moved to developing and maintaining YANG modules more directly as code assets which has allowed a more expedient development cycle.
 
@@ -135,16 +127,14 @@ There are several advantages to the IETF process used to develop YANG modules:
 
 Protocol experts generally ensure that the YANG modules provide good configuration coverage of the protocol in 
 
-
 The IETF process of developing YANG modules has several advantages:
 
 The work to generate these YANG models is delegated 
 
- Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.
+Although this approach has several benefits, i.e., following established practice, and wider review of the generated YANG models it also have several downsides.
 
 Historically, IETF has published YANG models as code assets embedded within 
 TODO Introduction
-
 
 # Proposals
 
@@ -213,12 +203,9 @@ The existing RFC errata process can be used to track bugs against stable publish
 
 Small fixes to published IETF YANG modules are processed in a similar fashion to how the IETF processes errata.  I.e., the responsible Area Director has authority to approve minor fixes.
 
-
 although there is also an IANA registry that eferences and.
 
 embedded the YANG module source in RFCs, where they cannot be updated without publishing a new RFC, not even for a bugfix or an errata.  Instead, the YANG modules would only be stored in an IANA registery, with the draft only maintaining a reference to the latest published version of the YANG module associated with the RFC.
-
-
 
 URL to an updateable reference to the latest published version of the YANG modules associated with the RFC.
 
@@ -240,23 +227,17 @@ IANA & Github rather than in RFCs.
 
 One added benefit.
 
-
-
 # Security Considerations
 
 For the purposes of this document, the pertinent security considerations are really about managing the code assets and related.
 
 Really about whether it is possible for a bad actor to modify the YANG modules that are published as having some level of IETF consensus without.
 
-
-
 # IANA Considerations
 
 TBD.
 
-
 This document has no IANA actions.
-
 
 --- back
 
