@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-23T00:35:29.017685+00:00",
+  "timestamp": "2022-10-25T00:38:09.626857+00:00",
   "repo": "rgwilton/draft-rwilton-netmod-publishing-yang-as-code",
   "labels": [
     {
@@ -50,5 +50,62 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOHdrH8s5Bb4Nr",
+      "title": "Initial merge",
+      "url": "https://github.com/rgwilton/draft-rwilton-netmod-publishing-yang-as-code/pull/1",
+      "state": "MERGED",
+      "author": "rgwilton",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-24T18:17:49Z",
+      "updatedAt": "2022-10-24T18:18:37Z",
+      "baseRepository": "rgwilton/draft-rwilton-netmod-publishing-yang-as-code",
+      "baseRefName": "main",
+      "baseRefOid": "89bc1a80bf883dbd35e2e4c6c19f93fa4445ca3e",
+      "headRepository": "rgwilton/draft-rwilton-netmod-publishing-yang-as-code",
+      "headRefName": "Initial-Revision",
+      "headRefOid": "4fba2ae934d5579c09391198ab49babb601d6a23",
+      "closedAt": "2022-10-24T18:18:30Z",
+      "mergedAt": "2022-10-24T18:18:30Z",
+      "mergedBy": "rgwilton",
+      "mergeCommit": {
+        "oid": "eccb812cfefbe61d04467307098172dd4e90519f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOHdrH8s5BdO2O",
+      "title": "Collapse initial-revision branch",
+      "url": "https://github.com/rgwilton/draft-rwilton-netmod-publishing-yang-as-code/pull/2",
+      "state": "MERGED",
+      "author": "rgwilton",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-24T23:51:53Z",
+      "updatedAt": "2022-10-24T23:55:34Z",
+      "baseRepository": "rgwilton/draft-rwilton-netmod-publishing-yang-as-code",
+      "baseRefName": "main",
+      "baseRefOid": "eccb812cfefbe61d04467307098172dd4e90519f",
+      "headRepository": "rgwilton/draft-rwilton-netmod-publishing-yang-as-code",
+      "headRefName": "Initial-Revision",
+      "headRefOid": "d30e738e8e2b851da2c63ca68def8343554d8823",
+      "closedAt": "2022-10-24T23:52:36Z",
+      "mergedAt": "2022-10-24T23:52:36Z",
+      "mergedBy": "rgwilton",
+      "mergeCommit": {
+        "oid": "9bf6b1e03a6a191d3538ad44c6c96cbd639f2966"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
